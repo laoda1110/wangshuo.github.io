@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>验证码跳转页面</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0f7fa; /* 浅蓝色背景 */
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .container input {
+            margin-top: 10px;
+            padding: 5px;
+            width: 80%;
+        }
+        .container button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .container button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>请输入验证码</h1>
+        <p id="generated-code"></p>
+        <input type="text" id="code" placeholder="输入验证码">
+        <button onclick="validateCode()">提交</button>
+        <p id="error-message" style="color: red; display: none;">验证码错误，请重试。</p>
+    </div>
+
+    <script>
+        // 生成随机4位验证码
+        function generateCode() {
+            return Math.floor(1000 + Math.random() * 9000).toString();
+        }
+
+        // 设置并显示生成的验证码
+        var correctCode = generateCode();
+        document.getElementById("generated-code").innerText = "验证码: " + correctCode;
+
+        // 验证用户输入的验证码
+        function validateCode() {
+            var inputCode = document.getElementById("code").value;
+            var errorMessage = document.getElementById("error-message");
+
+            if (inputCode === correctCode) {
+                window.location.href = "neibu/www.html";
+            } else {
+                errorMessage.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
